@@ -1,0 +1,20 @@
+.form-container .input-field input.ng-invalid {
+    border: 1px solid #bc0000;
+}
+
+:host {
+    form,
+    .error-message,
+    .form-container label,
+    .input-field label,
+    .form-container .input-field input:not([type='radio']),
+    input:not([type]):focus:not([readonly]),
+    .form-container .input-field select {
+        font-size: 12px;
+    }
+}
+.page-view {
+    max-height: 84vh;
+    overflow: auto;
+    border-radius: 0;
+}

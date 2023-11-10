@@ -1,0 +1,78 @@
+<div
+    class="form-container form-center"
+    [ngStyle]="configService.getInlineStyles(methodsConfig)"
+>
+    <h3>Setup two-factor authentication</h3>
+    <div class="form-subtitle">choose your own authenticaiton method</div>
+
+    <div class="mt-2">
+        <form [formGroup]="mfaOptionsForm" (ngSubmit)="onSelectedMfaMethod()">
+            <div *ngFor="let option of radioLabel">
+                <label [ngStyle]="configService.getInlineStyles(option)">
+                    <input
+                        type="radio"
+                        class="with-gap"
+                        formControlName="isMobOrEmail"
+                        [value]="option.value"
+                    /><span
+                        >{{ option.label }}
+                        <span
+                            [ngClass]="[
+                                isValidated ? 'btn-info' : 'btn-info-error'
+                            ]"
+                            *ngIf="
+                                option.key === radioLabel[1].key &&
+                                registeredNumber
+                            "
+                        >
+                            -
+                            {{
+                                isValidated ? 'Registered' : 'Not Validated'
+                            }}</span
+                        ></span
+                    >
+                </label>
+                <div
+                    *ngIf="option.key === radioLabel[1].key && registeredNumber"
+                    class="registered-mmethod-links"
+                >
+                    <span>{{ registeredNumber }}</span>
+                    <i class="material-icons" (click)="deleteEnrollment()"
+                        >delete</i
+                    >
+                </div>
+            </div>
+            <div
+                class="input-field"
+                *ngIf="
+                    mfaOptionsForm.get('isMobOrEmail').value ===
+                        'phoneNumber' && !registeredNumber
+                "
+            >
+                <label
+                    class="form-label"
+                    [ngStyle]="configService.getInlineStyles(infoConfig)"
+                    >{{ infoConfig.text }}</label
+                >
+                <input
+                    class="form-input"
+                    type="text"
+                    maxlength="16"
+                    minlength="7"
+                    formControlName="phoneNumber"
+                    placeholder="+1-209-8x4-xx81"
+                />
+            </div>
+            <button
+                type="submit"
+                color="primary"
+                class="btn btn-large mt-2"
+                [disabled]="mfaOptionsForm.invalid"
+                [ngStyle]="configService.getInlineStyles(buttonConfig)"
+            >
+                {{ buttonConfig.name }}
+            </button>
+        </form>
+    </div>
+</div>
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>

@@ -1,0 +1,155 @@
+<nav>
+    <div class="product-wrapper" [routerLink]="logoAndTitle.redirUrl">
+        <img
+            class="logo"
+            [src]="logoAndTitle.logoImgPath"
+            [alt]="logoAndTitle.titleText"
+        />
+        <a href="">{{ logoAndTitle.titleText }}</a>
+    </div>
+
+    <div class="nav-links">
+        <div class="options">
+            <button
+                [id]="option.id"
+                *ngFor="let option of options"
+                [routerLink]="option.redirUrl"
+                [ngStyle]="{
+                    color: option.color
+                }"
+            >
+                {{ option.text }}
+            </button>
+        </div>
+        <div class="profile-links" *ngIf="userData.isLoggedIn">
+            <div class="nav-partition"></div>
+            <span *ngFor="let icon of optionsAfterLogin">
+                <div
+                    class="profile-icon"
+                    [matMenuTriggerFor]="menu"
+                    *ngIf="icon.icon === 'account_circle'; else shoppingCart"
+                >
+                    <span
+                        class="user-name"
+                        [ngStyle]="{ color: profileConfig.color }"
+                    >
+                        {{ userData.name }}</span
+                    >
+                    <mat-icon [ngStyle]="{ color: profileConfig.color }">{{
+                        icon.icon
+                    }}</mat-icon>
+                    <i
+                        class="large material-icons"
+                        [matMenuTriggerFor]="menu"
+                        [ngStyle]="{ color: profileConfig.color }"
+                        >arrow_drop_down</i
+                    >
+                </div>
+
+                <ng-template #shoppingCart>
+                    <div class="nav-partition"></div>
+                    <mat-icon
+                        *ngIf="icon.icon === 'shopping_cart'; else cartIcon"
+                        matBadgePosition="above after"
+                        matBadgeSize="medium"
+                        matBadgeColor="warn"
+                        matBadge="{{ cartNotification === 'true' ? 1 : '' }}"
+                        [routerLink]="
+                            cartNotification === 'true' && icon.redirUrl
+                        "
+                        [ngStyle]="{ color: profileConfig.color }"
+                        >{{ icon.icon }}</mat-icon
+                    ></ng-template
+                >
+                <ng-template #cartIcon>
+                    <mat-icon
+                        *ngIf="
+                            icon.icon !== 'shopping_cart' ||
+                            icon.icon !== 'shopping_cart'
+                        "
+                        >{{ icon.icon }}</mat-icon
+                    ></ng-template
+                >
+            </span>
+
+            <mat-menu #menu="matMenu" xPosition="before">
+                <button
+                    mat-menu-item
+                    (click)="
+                        mat_option.click && mat_option.id === 'deleteAcc'
+                            ? deleteAcc()
+                            : mat_option.id === 'logout'
+                            ? logout()
+                            : mat_option.id === 'changePass'
+                            ? changePassword()
+                            : ''
+                    "
+                    *ngFor="let mat_option of matMenuItem"
+                    [id]="mat_option.id"
+                    [ngStyle]="{
+                        color: mat_option.color
+                    }"
+                    [routerLink]="mat_option.redirUrl"
+                    [disabled]="mat_option.id === 'deleteAcc' && isAdmin"
+                >
+                    {{ mat_option.text }}
+                </button>
+            </mat-menu>
+        </div>
+
+        <span *ngIf="!userData.isLoggedIn" class="auth-links">
+            <button
+                [id]="option.id"
+                *ngFor="let option of optionsBeforeLogin"
+                [routerLink]="option.redirUrl ? option.redirUrl : ''"
+                (click)="option.click ? loginRedirect() : ''"
+                [ngStyle]="{
+                    color: option.color
+                }"
+            >
+                {{ option.text }}
+            </button></span
+        >
+    </div>
+</nav>
+
+<app-dialog
+    header="{{ headingConfig.text }}"
+    subHeader="{{ subHeadingConfig.text }}"
+    content="{{ confirmText.text }}"
+    [headerStyles]="configService.getInlineStyles(headingConfig)"
+    [subHeaderStyles]="configService.getInlineStyles(subHeadingConfig)"
+    [contentStyles]="configService.getInlineStyles(confirmText)"
+    [show]="showDeleteModal"
+    class="delete-modal"
+    [isTransparent]="true"
+    modalName="delete"
+    [isDeleteModal]="true"
+>
+    <div class="input-field">
+        <label for="">{{ deleteConfirmText }}</label>
+        <input
+            type="text"
+            class="form-input"
+            [placeholder]="userData.name"
+            [ngModel]="fullnameNgModelDelete"
+            (ngModelChange)="onMatchingFullname($event)"
+        />
+        <div class="err-msg" *ngIf="isDeleteError">
+            {{ deleteErrMsg }}
+        </div>
+    </div>
+    <div class="flex btn-right-side">
+        <button class="btn cancel mr-1" (click)="showDeleteModal = false">
+            Cancel
+        </button>
+        <button
+            class="btn confirm"
+            (click)="confirmDialog()"
+            [disabled]="confirmBtnDisabled"
+        >
+            Confirm
+        </button>
+    </div>
+</app-dialog>
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>

@@ -1,0 +1,25 @@
+<div class="container">
+    <h6 class="mb-2">You are not logged in, select one of the option below!</h6>
+    <div class="flex">
+        <div class="form-container mr-2">
+            <p [ngStyle]="configService.getInlineStyles(accountExists)">
+                {{ accountExists.text }}
+            </p>
+            <button class="btn btn-link" (click)="callLogin()">
+                Click here to log in
+            </button>
+        </div>
+        <div class="form-container">
+            <p [ngStyle]="configService.getInlineStyles(accountNotExists)">
+                {{ accountNotExists.text }}
+            </p>
+            <button
+                class="btn btn-link"
+                (click)="callSignUp()"
+                [ngStyle]="configService.getInlineStyles(registerBtn)"
+            >
+                {{ registerBtn.text }}
+            </button>
+        </div>
+    </div>
+</div>

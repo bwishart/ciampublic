@@ -1,0 +1,60 @@
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+<div
+    class="form-container form-min-height"
+    [ngStyle]="configService.getInlineStyles(driverLicenseInfoConfig)"
+>
+    <div
+        class="form-heading"
+        [ngStyle]="configService.getInlineStyles(headingConfig)"
+    >
+        {{ headingConfig.text }}
+        <div class="form-subtitle">{{ subHeading }}</div>
+    </div>
+    <div *ngIf="!loading">
+        <form
+            [ngClass]="!!invalidDetails ? 'form-invalid' : 'form-valid'"
+            [formGroup]="drivingLicenseRenewalForm"
+            (ngSubmit)="submitForm()"
+        >
+            <div
+                *ngIf="showMessage"
+                class="form-subtitle form-info form-note mt-2 mb-2 "
+            >
+                {{ message }}
+            </div>
+            <div *ngFor="let field of formFields" class="input-field">
+                <label
+                    class="form-label"
+                    [ngStyle]="configService.getInlineStyles(field)"
+                >
+                    {{ field.label }}
+                </label>
+                <input
+                    placeholder="Enter {{ field.label }}"
+                    [formControlName]="field.fieldName"
+                    [attr.disabled]="field.readonly"
+                    [type]="'text'"
+                />
+                <span
+                    *ngIf="
+                        this.drivingLicenseRenewalForm.get(field.fieldName)
+                            .invalid &&
+                        this.drivingLicenseRenewalForm.get(field.fieldName)
+                            .touched
+                    "
+                    class="err-msg"
+                    >{{ errMessage }} {{ field.label | lowercase }}</span
+                >
+            </div>
+            <button
+                class="btn btn-large"
+                [type]="continueButtonConfig.type"
+                [disabled]="drivingLicenseRenewalForm.invalid"
+                *ngIf="validateLicenseNumber()"
+                [ngStyle]="configService.getInlineStyles(continueButtonConfig)"
+            >
+                {{ continueButtonConfig.name }}
+            </button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+<div
+    class="form-container form-min-height"
+    [ngStyle]="configService.getInlineStyles(confirmationInfoConfig)"
+>
+    <div class="form-heading">{{ heading }}</div>
+
+    <div *ngIf="!loading">
+        <form [formGroup]="confirmationForm" (ngSubmit)="onConfirmation()">
+            <div
+                class="form-subtitle form-info form-note mt-2 mb-2 "
+                [ngStyle]="configService.getInlineStyles(message)"
+            >
+                {{ message.text }}
+            </div>
+
+            <div *ngFor="let field of formFields" class="input-field">
+                <label [ngStyle]="configService.getInlineStyles(field)">
+                    {{ field.label }}
+                </label>
+
+                <input
+                    *ngIf="field.type !== 'radio'"
+                    [formControlName]="field.fieldName"
+                    [attr.disabled]="field.readonly"
+                    [type]="'text'"
+                />
+                <div *ngIf="field.type === 'radio'" class="radio-field">
+                    <div *ngFor="let label of radioLabel">
+                        <label>
+                            <input
+                                class="with-gap"
+                                type="radio"
+                                [formControlName]="field.fieldName"
+                                [value]="label.value"
+                                [attr.disabled]="field.readonly"
+                            /><span>{{ label.name }}</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <button
+                class="btn btn-large"
+                [type]="continueButtonConfig.type"
+                [disabled]="confirmationForm.invalid"
+                [ngStyle]="configService.getInlineStyles(continueButtonConfig)"
+            >
+                {{ continueButtonConfig.name }}
+            </button>
+        </form>
+    </div>
+</div>

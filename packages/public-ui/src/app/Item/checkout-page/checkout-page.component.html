@@ -1,0 +1,102 @@
+<div
+    class="form-container"
+    [ngStyle]="configService.getInlineStyles(checkoutConfig)"
+>
+    <div class="form-heading">
+        <span
+            class="title"
+            [ngStyle]="configService.getInlineStyles(headlineConfig)"
+            >{{ headlineConfig.text }}</span
+        >
+    </div>
+    <div>
+        <form [formGroup]="checkoutForm" (ngSubmit)="onCheckout()">
+            <div class="input-field" *ngFor="let field of formFields">
+                <label
+                    class="form-label"
+                    [ngStyle]="configService.getInlineStyles(field)"
+                    *ngIf="field.type !== 'select'"
+                    >{{ field.label }}</label
+                >
+
+                <input
+                    *ngIf="
+                        field.type !== 'select' &&
+                        field.fieldName !== 'cardNumber' &&
+                        field.fieldName !== 'securityCode'
+                    "
+                    class="form-input"
+                    placeholder="Enter your {{ field.label }}"
+                    [formControlName]="field.fieldName"
+                    [type]="field.type || 'text'"
+                    [min]="field.type === 'month' && date | date: 'yyyy-MM'"
+                    autocomplete="new-password"
+                />
+                <input
+                    *ngIf="field.fieldName === 'cardNumber'"
+                    class="form-input"
+                    placeholder="Enter your {{ field.label }}"
+                    [formControlName]="field.fieldName"
+                    [type]="field.type || 'text'"
+                    appMask
+                    maskName="credit-card"
+                />
+                <input
+                    *ngIf="field.fieldName === 'securityCode'"
+                    class="form-input"
+                    placeholder="Enter your {{ field.label }}"
+                    [formControlName]="field.fieldName"
+                    [type]="field.type || 'text'"
+                    appMask
+                    maskName="security-code"
+                />
+                <ng-container *ngIf="field.type === 'select'">
+                    <label
+                        class="form-label"
+                        [ngStyle]="configService.getInlineStyles(field)"
+                        >{{ field.label }}</label
+                    >
+                    <select
+                        class="form-input"
+                        [formControlName]="field.fieldName"
+                    >
+                        <option selected disabled value=""
+                            >Select your {{ field.label }}</option
+                        >
+                        <option
+                            *ngFor="let card of cardOptions"
+                            [value]="card"
+                            >{{ card }}</option
+                        >
+                    </select>
+                </ng-container>
+
+                <span
+                    *ngIf="
+                        this.checkoutForm.get(field.fieldName).invalid &&
+                        this.checkoutForm.get(field.fieldName).touched
+                    "
+                    class="err-msg"
+                    >{{ errMessage }} {{ field.label | lowercase }}</span
+                >
+            </div>
+
+            <div
+                class="form-subtitle mb-1"
+                [ngStyle]="configService.getInlineStyles(transactionNoteConfig)"
+            >
+                {{ transactionNoteConfig.text }}
+            </div>
+
+            <button
+                class="btn btn-large"
+                type="submit"
+                [disabled]="checkoutForm.invalid"
+                [ngStyle]="configService.getInlineStyles(btnConfig)"
+            >
+                {{ btnConfig.name }}
+            </button>
+        </form>
+    </div>
+    <app-loading-spinner *ngIf="loading"></app-loading-spinner>
+</div>

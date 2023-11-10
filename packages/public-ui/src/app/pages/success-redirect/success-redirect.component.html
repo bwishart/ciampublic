@@ -1,0 +1,10 @@
+<app-dialog
+    [header]="header"
+    [subHeader]="subHeader"
+    [content]="content"
+    [contentStyles]="configService.getInlineStyles(contentConfig)"
+    [popupContStyle]="configService.getInlineStyles(signupSuccessConfig)"
+    [show]="true"
+>
+    <a [href]="btnUrl" class="btn btn-large" *ngIf="showBtn">{{ btnText }}</a>
+</app-dialog>

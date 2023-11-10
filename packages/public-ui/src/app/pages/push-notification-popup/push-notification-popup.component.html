@@ -1,0 +1,48 @@
+<div class="overlay" [class.transparent-overlay]="true">
+    <div class="push-notificatio-modal">
+        <div class="header">
+            <i class="material-icons" (click)="closePopup(false)">cancel</i>
+            <div class="product-wrapper product">
+                <img
+                    class="logo"
+                    [src]="logoAndTitle.logoImgPath"
+                    [alt]="logoAndTitle.titleText"
+                />
+                <a class="header-name">{{ logoAndTitle.titleText }}</a>
+            </div>
+        </div>
+        <div class="content">
+            <p>
+                We have sent a <b>notification</b> to
+                <b>your device,</b> approve it to complete the process
+            </p>
+            <div class="trouble">
+                <p>Having trouble with push notification?</p>
+                <div class="loader-container" *ngIf="isSendingNotification">
+                    <div class="loader--text"></div>
+                </div>
+
+                <button
+                    color="primary"
+                    class="btn push-notification-timer--btn"
+                    [type]="buttonType.type"
+                    [disabled]="isButton"
+                    (click)="resendNotification()"
+                    *ngIf="isTimerBtn && !isSendingNotification"
+                >
+                    {{ buttonType.name }} in {{ countDownTime }}
+                </button>
+                <button
+                    color="primary"
+                    class="btn push-notification-btn"
+                    [type]="buttonType.type"
+                    [disabled]="isButton"
+                    (click)="resendNotification()"
+                    *ngIf="!isTimerBtn && !isSendingNotification"
+                >
+                    {{ buttonType.name }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

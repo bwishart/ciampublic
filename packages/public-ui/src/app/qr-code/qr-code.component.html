@@ -1,0 +1,78 @@
+<div class="overlay">
+    <h4 class="top">Enable Password-less Authentication</h4>
+    <div class="mt">
+        <div class="flex">
+            <div class="number primary-color mr-2">
+                <p class="firstnumber">1</p>
+            </div>
+            <img [src]="imgPath" alt="Play Store Image" />
+        </div>
+        <h5>Download the app</h5>
+        <p>
+            Follow these instructions or click next if you already have have IBM
+            Security Verify
+        </p>
+        <p class="next">
+            Downloaded on your device.
+        </p>
+        <ol>
+            <li>
+                Lauch the App Store(iOS) or Google Play Store (Android) app.
+            </li>
+            <li>Search for "IBM Security Verify"</li>
+            <li>Tap "Get" and "Install" to download the app</li>
+        </ol>
+    </div>
+    <div class="nav-partition"></div>
+    <div class="mt">
+        <div class="flex">
+            <div class="number primary-color mr-3">
+                <p class="secondnumber">2</p>
+            </div>
+            <div #qrCode>
+                <qr-code [value]="qrInfo" [size]="width"></qr-code>
+            </div>
+        </div>
+        <div>
+            <h5 style="margin: 0px;">Connect your account</h5>
+            <p class="next">
+                Next, connect the app to your account.
+            </p>
+            <ol>
+                <li>Launch the IBM Security Verify app.</li>
+                <li>Top to connect a new account.</li>
+                <li>Scan the QR Code by using your device's camera</li>
+                <li>
+                    Finally, follow the on-screen prompts and click 'Done !'
+                    when finished
+                </li>
+            </ol>
+            <hr class="mb-1 mt-1" />
+            <p>
+                You will be automatically taken to the next step once your
+                account is connected
+            </p>
+            <div class="spinner-content" *ngIf="!loading">
+                <div class="preloader-wrapper active">
+                    <div class="spinner-layer spinner-blue-only">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+                <span class="loader-text">Waiting for confirmation</span>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="nav-partition-bottom" />
+<button class="btn mt-2 bottom" routerLink="/manage-account">
+    Skip
+</button>
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>

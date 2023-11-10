@@ -1,0 +1,102 @@
+.push-notificatio-modal {
+    display: block;
+    max-width: 430px;
+    width: 100%;
+    font-size: 0.87rem;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 0.25rem;
+    background-color: #fff;
+}
+
+.header {
+    background-color: #f0f3f4;
+    text-align: center;
+    i {
+        position: relative;
+        float: right;
+        margin: 0.6rem 0.7rem 0 0;
+        cursor: pointer;
+    }
+}
+
+.product-wrapper {
+    width: 100%;
+    justify-content: center;
+}
+
+.product {
+    padding: 0.8rem 0 2rem 0;
+    text-align: center;
+}
+
+.header-name {
+    font-size: 1.3rem;
+}
+
+.content {
+    padding: 2rem 2rem 2.5rem 2rem;
+    color: #404040;
+    font-size: 16px;
+}
+
+.trouble {
+    margin-top: 15px;
+}
+
+.push-notification-btn {
+    width: 100%;
+    max-width: 180px;
+    min-height: 2rem;
+    margin-top: 15px;
+    font-size: 16px;
+}
+
+.push-notification-timer--btn {
+    width: 100%;
+    max-width: 250px;
+    min-height: 3rem;
+    margin-top: 15px;
+    font-size: 16px;
+}
+
+.product {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// loading spinner
+
+.loader-container {
+    width: 200px;
+}
+
+.loader--text {
+    position: relative;
+    top: 11px;
+    left: 0;
+    right: 0;
+    color: #ea1f27;
+}
+
+.loader--text:after {
+    content: 'Sending notification';
+    animation-name: loading-text;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes loading-text {
+    0% {
+        content: 'Sending notification';
+    }
+    25% {
+        content: 'Sending notification.';
+    }
+    50% {
+        content: 'Sending notification..';
+    }
+    75% {
+        content: 'Sending notification...';
+    }
+}

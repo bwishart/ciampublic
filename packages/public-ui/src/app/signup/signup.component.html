@@ -1,0 +1,102 @@
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+<div
+    class="form-container form-center"
+    [ngStyle]="configService.getInlineStyles(signupConfig)"
+    *ngIf="!loading"
+>
+    <div
+        class="form-heading"
+        [ngStyle]="configService.getInlineStyles(headlingConfig)"
+    >
+        {{ headlingConfig.text }}
+    </div>
+    <div
+        class="form-subtitle"
+        [ngStyle]="configService.getInlineStyles(subHeadlingConfig)"
+    >
+        {{ subHeadlingConfig.text }}
+    </div>
+    <form
+        [formGroup]="signupForm"
+        [ngClass]="
+            !!formError || !!matchingError ? 'form-invalid' : 'form-valid'
+        "
+        (ngSubmit)="onFormSubmit()"
+    >
+        <ng-container>
+            <div
+                class="input-field"
+                [ngClass]="{
+                    'text-success': signupForm.valid
+                }"
+                *ngFor="let field of inputType"
+            >
+                <label
+                    class="form-label"
+                    [ngStyle]="configService.getInlineStyles(field)"
+                    for="{{ field.label }}"
+                    >{{ field.label }}</label
+                >
+                <input
+                    *ngIf="field.fieldName !== 'ssn'"
+                    class="form-input"
+                    placeholder="Enter your {{ field.label }}"
+                    id="{{ field.label }}"
+                    [formControlName]="field.fieldName"
+                    [type]="'text'"
+                />
+                <input
+                    *ngIf="field.fieldName === 'ssn'"
+                    appMask
+                    maskName="ssn"
+                    class="form-input"
+                    placeholder="Enter your {{ field.label }}"
+                    id="{{ field.label }}"
+                    [formControlName]="field.fieldName"
+                    maxlength="11"
+                    minlength="11"
+                    [type]="'text'"
+                />
+                <span
+                    *ngIf="field.fieldName !== 'email' && matching"
+                    class="form-input inline-spinner"
+                ></span>
+                <div
+                    class="err-msg"
+                    *ngIf="this.signupForm?.get(field.fieldName)?.touched && this.signupForm?.get(field.fieldName)?.errors?.['required'] && field.fieldName !== 'ssn'"
+                >
+                    {{ field.label }} {{ requiredErrMessage }}
+                </div>
+                <div
+                    class="err-msg"
+                    *ngIf="this.signupForm?.get(field.fieldName)?.touched && this.signupForm?.get(field.fieldName)?.errors?.['required'] && field.fieldName === 'ssn'"
+                    [ngStyle]="configService.getInlineStyles(errorMsgSSN)"
+                >
+                    {{ errorMsgSSN.text }}
+                </div>
+            </div>
+            <div *ngIf="matchingError" class="error-message mb-1">
+                {{ matchingError }}
+            </div>
+        </ng-container>
+        <div *ngIf="formError" class="error-message">
+            {{ formError }}
+        </div>
+        <p
+            [ngStyle]="configService.getInlineStyles(emailNote)"
+            [innerHtml]="emailNote.text"
+        ></p>
+        <button
+            color="primary"
+            class="btn btn-large"
+            [disabled]="signupForm.invalid || matchingError"
+            [ngStyle]="configService.getInlineStyles(buttonType)"
+        >
+            {{ buttonType.name }}
+        </button>
+        <p
+            [innerHtml]="loginNote.text"
+            [ngStyle]="configService.getInlineStyles(loginNote)"
+        ></p>
+    </form>
+</div>

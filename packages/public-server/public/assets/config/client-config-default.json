@@ -1,0 +1,385 @@
+{
+    "button": {
+        "updateISV": true,
+        "selector": ".btn"
+    },
+    "product": {
+        "selector": ".product-wrapper a",
+        "text": "Public",
+        "updateISV": true
+    },
+    "page": {
+        "selector": "body",
+        "updateISV": true
+    },
+    "font": {
+        "selector": "*, .nav-links .mat-badge-content, .mat-menu-item",
+        "updateISV": true,
+        "fontFamily": "Outfit, sans-serif"
+    },
+    "nav": {
+        "selector": "nav",
+        "optionsBeforeLogin": [
+            {
+                "key": "login",
+                "text": "Log in"
+            },
+            {
+                "key": "signup",
+                "text": "Sign up"
+            }
+        ],
+        "options": [
+            {
+                "key": "home",
+                "text": "Home"
+            },
+            {
+                "key": "plans",
+                "text": "Plan"
+            },
+            {
+                "key": "benefits",
+                "text": "Benefits"
+            },
+            {
+                "key": "about",
+                "text": "About"
+            }
+        ],
+        "matMenuItem": [
+            {
+                "key": "changePassword",
+                "text": "Change password"
+            },
+            {
+                "key": "manageConsent",
+                "text": "Manage consent"
+            },
+            {
+                "key": "deleteAccount",
+                "text": "Delete account"
+            },
+            {
+                "key": "mfa",
+                "text": "Strengthen Your Security with MFA"
+            },
+            {
+                "key": "userinfo",
+                "text": "Manage profile"
+            },
+            {
+                "key": "qrCode",
+                "text": "Register Mobile Authentication"
+            },
+            {
+                "key": "logout",
+                "text": "Logout"
+            }
+        ]
+    },
+    "form": {
+        "selector": ".form-container",
+        "updateISV": true
+    },
+    "dashboard": {
+        "headline": {
+            "text": "Convenience and comfort in digital world"
+        },
+        "subheading": {
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
+        }
+    },
+    "dashboardTiles": {
+        "changeLayout": false,
+        "tiles": [
+            {
+                "key": "tile1",
+                "text": "Register for unemployment"
+            },
+            {
+                "key": "tile2",
+                "text": "Renew driver's license"
+            },
+            {
+                "key": "tile3",
+                "text": ""
+            },
+            {
+                "key": "tile4",
+                "text": ""
+            },
+            {
+                "key": "tile5",
+                "text": ""
+            },
+            {
+                "key": "tile6",
+                "text": ""
+            },
+            {
+                "key": "tile7",
+                "text": ""
+            },
+            {
+                "key": "tile8",
+                "text": ""
+            }
+        ]
+    },
+    "identityProofing": {
+        "text": "Identity proofing...",
+        "successContent": "Please check your email for a welcome message and a link to reset your password",
+        "changeLayout": false,
+        "timeOutValue": 5000
+    },
+    "checkout": {
+        "headline": {
+            "text": "Check Out"
+        },
+        "form": [
+            {
+                "key": "paymentType",
+                "label": "Payment Type"
+            },
+            {
+                "key": "fullName",
+                "label": "Full Name (as shown on card)"
+            },
+            {
+                "key": "securityCode",
+                "label": "Security Code"
+            }
+        ],
+        "transactionNote": {
+            "text": "There is a $50.00 renewal fee that will be charged to your credit card. Your card will not be charged until you have a chance to review the transaction."
+        },
+        "button": {
+            "name": "Continue"
+        }
+    },
+    "signup": {
+        "headline": {
+            "text": "Signup"
+        },
+        "subheading": {
+            "text": "Signup to create your account below"
+        },
+        "errorMsgSSN": {
+            "text": "SSN is invalid, please enter a valid SSN"
+        },
+        "button": {
+            "name": "Signup"
+        },
+        "emailNote": {
+            "text": "If you don't have an email account, <a href='https://accounts.google.com/signup/v2/webcreateaccount?hl=en&flowName=GlifWebSignIn&flowEntry=SignUp'>Click here</a> to get one "
+        },
+        "loginNote": {
+            "text": "Already have an account? <a href='/login'>Click here</a> login url should come here"
+        }
+    },
+    "signupSuccessPopup": {
+        "content": {
+            "text": "Please check your email for a welcome message and a link to reset your password"
+        }
+    },
+    "unEmployementReg": {
+        "headline": {
+            "text": "Unemployement Registration"
+        }
+    },
+    "unEmploymentRegSuccess": {
+        "message": {
+            "text": "<h4>Congratulations</h4> you have successfully registered for unemployment! Please <a href=\"/dashboard\">click here</a> to return to the home screen"
+        }
+    },
+    "licenseRenewalSuccess": {
+        "message": {
+            "text": "You have 1 item in your shopping cart. Please  <a href=\"/dashboard\">click home page</a> to return to your home page and check out or, <a href=\"/checkout\">click check out now</a> to finish the transaction."
+        }
+    },
+    "mfaOtp": {
+        "button": {
+            "name": "Submit"
+        },
+        "mailMessage": {
+            "text": "OTP sent to your mail!"
+        }
+    },
+    "mfaMethods": {
+        "button": {
+            "name": "Submit"
+        },
+        "info": {
+            "text": "Please enter the mobile number you want to use for MFA"
+        },
+        "radioLabel": [
+            {
+                "key": "phoneNumber",
+                "label": "Phone"
+            }
+        ]
+    },
+    "mfaConsent": {
+        "description": {}
+    },
+    "deleteAccount": {
+        "headline": {
+            "text": "Delete Account"
+        },
+        "subheading": {
+            "text": "Deleting your account will delete your account and any data related to it, with the exception of historical data related to your consent, and log information for past authentication attempts and any past action to modify your personal data"
+        },
+        "confirmText": {
+            "text": "!!Are you sure you want to delete your account?  If yes, please click CONFIRM below"
+        }
+    },
+    "redirectionPage": {
+        "accountExists": {
+            "text": "Already have an account?"
+        },
+        "accountNotExists": {
+            "text": "Don’t have an account?"
+        },
+        "registerBtn": {
+            "text": "Click here to register and set up a new account"
+        }
+    },
+    "driverLicense": {
+        "heading": {
+            "text": "Driver's License Renewal"
+        },
+        "button": {
+            "name": "Continue"
+        }
+    },
+    "deleteAccountSuccess": {
+        "successText": {
+            "text": "Your account has been deleted successfully"
+        }
+    },
+    "confirmationPage": {
+        "button": {
+            "name": "Continue"
+        },
+        "message": {
+            "text": "Please verify the following information and click Submit"
+        },
+        "form": [
+            {
+                "key": "purchaseType",
+                "label": "Purchase Type:",
+                "value": "Driver’s License Renewal"
+            },
+            {
+                "key": "cardType",
+                "label": "Credit Card Type:"
+            },
+            {
+                "key": "price",
+                "label": "Price:",
+                "value": "$50.00"
+            },
+            {
+                "key": "cardConsent",
+                "label": "Consent to store Credit Card"
+            },
+            {
+                "key": "infoConsent",
+                "label": "Consent to share credit card information with other"
+            }
+        ]
+    },
+    "creditCardConsent": {
+        "headline": {
+            "text": "USER CONSENT"
+        },
+        "note": {
+            "text": "*NOTE: No Transactions will be made without your prior approval"
+        },
+        "consentForm": [
+            {
+                "key": "creditCardConsentDMV"
+            },
+            {
+                "key": "creditCardConsentAgencies"
+            }
+        ],
+        "button": {
+            "name": "Continue"
+        }
+    },
+    "manageConsent": {
+        "headline": {
+            "text": "Manage Consent"
+        },
+        "subHeading": {
+            "text": "Use this page to manage your Consents. Check or uncheck the appropriate checkboxes to manage your consents."
+        },
+        "consentForm": [
+            {
+                "key": "creditCardConsentDMV"
+            },
+            {
+                "key": "creditCardConsentAgencies"
+            },
+            {
+                "key": "mfaMobileNumber"
+            }
+        ]
+    },
+    "pushNotification": {
+        "showSSN": {
+            "title": "Show Full SSN",
+            "message": "You have initiated to show full SSN, Would you like to proceed?"
+        },
+        "accountUpdate": {
+            "title": "Account Update",
+            "message": "You are trying to modify your account. Please confirm to proceed"
+        }
+    },
+    "userAttrs": {
+        "attrs": [
+            {
+                "key": "ssn",
+                "label": "SSN"
+            },
+            {
+                "key": "driverLicenseNumber",
+                "label": "Driver's license number"
+            },
+            {
+                "key": "homeAddress",
+                "label": "Home Address"
+            },
+            {
+                "key": "creditCardNumber",
+                "label": "Credit Card Number"
+            },
+            {
+                "key": "creditCardExpiration",
+                "label": "Credit Card Expiration"
+            },
+            {
+                "key": "lastEmployerName",
+                "label": "Last employer name"
+            },
+            {
+                "key": "lastEmploymentDate",
+                "label": "Last date of employment"
+            },
+            {
+                "key": "firstName",
+                "label": "First Name"
+            },
+            {
+                "key": "lastName",
+                "label": "Last Name"
+            },
+            {
+                "key": "email",
+                "label": "Email"
+            }
+        ]
+    }
+}

@@ -1,0 +1,48 @@
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+
+<div class="landing-container container" *ngIf="!loading">
+    <div *ngIf="dashboardConfig" class="landing-content">
+        <h3
+            [ngStyle]="{
+                color: dashboardConfig.heading?.color
+            }"
+            [innerHTML]="dashboardConfig.headline?.text || heading"
+        ></h3>
+
+        <span
+            class="content"
+            [ngStyle]="{
+                color: dashboardConfig.subheading?.color
+            }"
+        >
+            {{ dashboardConfig.subheading?.text || content }}
+        </span>
+        <div class="buttons landing-buttons">
+            <ng-container
+                *ngFor="let title of buttonTitles; let i = index"
+                class="buttons"
+            >
+                <button
+                    class="buttonContent btn"
+                    [ngClass]="{ 'btn-link': showTilesAsLinks }"
+                    *ngIf="i < buttonTitles.length && title.text.length !== 0"
+                    (click)="navigate(title)"
+                    [disabled]="title.disabled"
+                    [ngStyle]="{
+                        color: title.color,
+                        backgroundColor: title.backgroundColor
+                    }"
+                >
+                    {{ title.text }}
+                    <p *ngIf="title.disabled" class="btn-info register-link">
+                        - {{ title.completedText }}
+                    </p>
+                </button>
+            </ng-container>
+        </div>
+    </div>
+    <div
+        class="landing-image"
+        [ngStyle]="{ 'background-image': 'url(' + imagePath + ')' }"
+    ></div>
+</div>

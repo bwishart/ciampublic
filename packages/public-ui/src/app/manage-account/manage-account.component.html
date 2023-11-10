@@ -1,0 +1,153 @@
+<div class="form-container">
+    <div class="form-heading">
+        <span class="title">{{ message.msg }}</span>
+    </div>
+    <h6 (click)="userInfoDropdown()">
+        User Profile<i class="material-icons" *ngIf="infoDropdown"
+            >arrow_drop_up</i
+        ><i class="material-icons" *ngIf="!infoDropdown">arrow_drop_down</i>
+    </h6>
+    <div *ngIf="infoDropdown">
+        <form [formGroup]="accountForm" (ngSubmit)="onManageFormSubmit()">
+            <div class="form-subtitle form-info">
+                {{ info }}
+                <div>{{ note }}</div>
+            </div>
+            <div
+                [ngClass]="{
+                    'input-field': true,
+                    'ssn-field': field.fieldName === 'ssn'
+                }"
+                *ngFor="let field of formFields"
+            >
+                <label class="form-label" for="{{ field.label }}">{{
+                    field.label
+                }}</label>
+                <input
+                    class="form-input"
+                    placeholder="{{ field.placeholder }}"
+                    id="{{ field.label }}"
+                    [formControlName]="field.fieldName"
+                    [ngClass]="[field.nooutline ? 'disabled' : '']"
+                    [readonly]="field.readonly"
+                    [type]="field.type || 'text'"
+                    [min]="field.type === 'month' && date | date: 'yyyy-MM'"
+                />
+                <div
+                    class="inline-checkbox ml-1"
+                    *ngIf="field.fieldName === 'ssn' && !showSSN"
+                >
+                    <label>
+                        <input
+                            class="filled-in"
+                            type="checkbox"
+                            (click)="change()"
+                            [checked]="showPopup"
+                        /><span>Show {{ getSSNLabel() }}</span>
+                    </label>
+                </div>
+
+                <!-- <ng-container *ngIf="field.type === 'select'">
+                    <label class="form-label">{{ field.label }}</label>
+                    <select
+                        class="form-input"
+                        [formControlName]="field.fieldName"
+                    >
+                        <option selected disabled value="">{{
+                            field.placeholder
+                        }}</option>
+                        <option
+                            *ngFor="let card of cardOptions"
+                            [value]="card"
+                            >{{ card }}</option
+                        >
+                    </select>
+                </ng-container> -->
+
+                <span
+                    *ngIf="
+                        this.accountForm.get(field.fieldName).invalid &&
+                        this.accountForm.get(field.fieldName).touched
+                    "
+                    class="error-message"
+                    >{{ errMessage }} {{ field.label | lowercase }}</span
+                >
+            </div>
+            <button
+                class="btn btn-large"
+                [type]="message.btn.type"
+                [disabled]="accountForm.invalid || !accountForm.dirty"
+            >
+                {{ message.btn.name }}
+            </button>
+        </form>
+    </div>
+    <div *ngIf="!isQrCodeEnabled">
+        <h6 (click)="userDeviceDropdown()">
+            Registered devices<i class="material-icons" *ngIf="deviceDropdown"
+                >arrow_drop_up</i
+            ><i class="material-icons" *ngIf="!deviceDropdown"
+                >arrow_drop_down</i
+            >
+        </h6>
+        <div *ngIf="deviceDropdown">
+            <form
+                [formGroup]="registeredDeviceForm"
+                class="justify-space-between devices"
+            >
+                <div
+                    [ngClass]="{
+                        'input-field': true
+                    }"
+                    *ngFor="let field of registeredDevices"
+                >
+                    <label class="form-label" for="{{ field.label }}">{{
+                        field.label
+                    }}</label>
+                    <input
+                        class="form-input"
+                        id="{{ field.label }}"
+                        [ngStyle]="{
+                            color: field.fieldName === 'action' ? 'red' : '',
+                            cursor: 'pointer'
+                        }"
+                        (click)="
+                            field.fieldName === 'action' &&
+                                (showRmvDevModal = true)
+                        "
+                        [formControlName]="field.fieldName"
+                        [ngClass]="[field.nooutline ? 'disabled' : '']"
+                        [readonly]="field.readonly"
+                    />
+                </div>
+            </form>
+        </div>
+    </div>
+    <app-loading-spinner *ngIf="loading"></app-loading-spinner>
+</div>
+<app-push-notification-popup
+    (closeDialog)="closePushNotification($event)"
+    [userSignatureData]="userSignatureData"
+    *ngIf="showPopup"
+></app-push-notification-popup>
+<app-dialog
+    header="{{ rmvDevheadingConfig.text }}"
+    content="{{ rmvDevcontent.text }}"
+    [headerStyles]="configService.getInlineStyles(rmvDevheadingConfig)"
+    [subHeaderStyles]="configService.getInlineStyles(rmvDevsubHeadingConfig)"
+    [contentStyles]="configService.getInlineStyles(rmvDevcontent)"
+    [show]="showRmvDevModal"
+    class="delete-modal"
+    [isTransparent]="true"
+    modalName="delete"
+    [isRemoveDeviceModal]="true"
+>
+    <div class="flex btn-right-side">
+        <button class="btn cancel mr-1" (click)="showRmvDevModal = false">
+            Cancel
+        </button>
+        <button class="btn confirm" (click)="deleteQrCodeRegistration()">
+            Confirm
+        </button>
+    </div>
+</app-dialog>

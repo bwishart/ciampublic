@@ -1,0 +1,8 @@
+# dependencies
+node_modules
+angular-build
+.angular
+**/tenant-config.json
+**/cert.pem
+**/key.pem
+.DS_Store

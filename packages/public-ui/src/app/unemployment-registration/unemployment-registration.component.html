@@ -1,0 +1,79 @@
+<div
+    class="form-container"
+    [ngStyle]="configService.getInlineStyles(unEmpRegConfig)"
+>
+    <div class="form-heading">
+        <span
+            class="title"
+            [ngStyle]="configService.getInlineStyles(headlingConfig)"
+            >{{ headlingConfig.text }}</span
+        >
+    </div>
+    <div>
+        <form [formGroup]="registrationForm" (ngSubmit)="unEmployemntForm()">
+            <div class="input-field" *ngFor="let field of inputType">
+                <label
+                    class="form-label"
+                    *ngIf="field.fieldName !== 'date'"
+                    [ngStyle]="configService.getInlineStyles(field)"
+                    >{{ field.label }}</label
+                >
+                <input
+                    *ngIf="field.fieldName !== 'date'"
+                    class="form-input"
+                    placeholder="Enter your{{ field.label }}"
+                    [formControlName]="field.fieldName"
+                    [type]="field.type"
+                    [max]="field.type === 'date' && date"
+                />
+
+                <div *ngIf="field.type === 'radio'" class="radio-field">
+                    <div *ngFor="let label of radioLabel">
+                        <label>
+                            <input
+                                class="with-gap"
+                                type="radio"
+                                [formControlName]="field.fieldName"
+                                [value]="label.value"
+                            /><span>{{ label.name }}</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div
+                    *ngIf="
+                        field.fieldName === 'date' &&
+                        registrationForm.get('isUnEmploymentCollected').value
+                    "
+                >
+                    <label class="form-label">{{ field.label }}</label>
+                    <input
+                        class="form-input"
+                        placeholder="{{ field.placeholder }}"
+                        id="{{ field.label }}"
+                        [formControlName]="field.fieldName"
+                        [type]="field.type"
+                        [max]="date"
+                    />
+                </div>
+
+                <span
+                    *ngIf="
+                        this.registrationForm.get(field.fieldName).invalid &&
+                        this.registrationForm.get(field.fieldName).touched
+                    "
+                    class="error-message"
+                    >{{ errMessage }} {{ field.label | lowercase }}</span
+                >
+            </div>
+            <button
+                class="btn btn-large"
+                [type]="buttonType.type"
+                [disabled]="registrationForm.invalid"
+            >
+                {{ buttonType.name }}
+            </button>
+        </form>
+    </div>
+    <app-loading-spinner *ngIf="loading"></app-loading-spinner>
+</div>

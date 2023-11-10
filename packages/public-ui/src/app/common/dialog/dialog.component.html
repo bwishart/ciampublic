@@ -1,0 +1,39 @@
+<div *ngIf="show" class="overlay" [class.transparent-overlay]="isTransparent">
+    <div
+        [ngClass]="{
+            modal: true,
+            'delete-box-size': isDeleteModal,
+            removeDevice: isRemoveDeviceModal
+        }"
+        [ngStyle]="popupContStyle"
+    >
+        <div
+            [ngClass]="{
+                'modal-content': true,
+                'modal-content-delete': isDeleteModal
+            }"
+        >
+            <h4 *ngIf="!isTransparent" [ngStyle]="headerStyles">
+                {{ header }}
+            </h4>
+            <h5
+                *ngIf="isDeleteModal || isRemoveDeviceModal"
+                [ngStyle]="headerStyles"
+            >
+                <mat-icon>info</mat-icon> {{ header }}
+            </h5>
+            <h4 *ngIf="!isTransparent" [ngStyle]="subHeaderStyles">
+                {{ subHeader }}
+            </h4>
+            <p
+                *ngIf="isTransparent && !isRemoveDeviceModal"
+                class="deleteSubHeading"
+                [ngStyle]="subHeaderStyles"
+            >
+                {{ subHeader }}
+            </p>
+            <p [ngStyle]="contentStyles">{{ content }}</p>
+        </div>
+        <ng-content></ng-content>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+.deleteSubHeading {
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #ffb7b7;
+}
+
+.delete-box-size {
+    max-width: 750px;
+    text-align: left;
+    top: 8rem;
+    overflow: hidden;
+}
+
+.removeDevice {
+    max-width: 550px;
+    text-align: left;
+    padding: 1rem 2rem 8rem 1rem;
+    max-height: 225px;
+    overflow: hidden;
+}
+
+mat-icon {
+    font-size: smaller;
+    top: 2px;
+}
+
+.modal-content-delete {
+    padding: 0px !important;
+}
+
+h5 {
+    margin-left: -1rem;
+}

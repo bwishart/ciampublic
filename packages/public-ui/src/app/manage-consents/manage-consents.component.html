@@ -1,0 +1,47 @@
+<div
+    class="form-container form-center center"
+    [ngStyle]="configService.getInlineStyles(manageConsentConfig)"
+>
+    <div
+        class="form-heading"
+        [ngStyle]="configService.getInlineStyles(headingConfig)"
+    >
+        {{ headingConfig.text }}
+    </div>
+    <div
+        class="form-subtitle mt-1 mb-2"
+        [ngStyle]="configService.getInlineStyles(subHeadingConfig)"
+    >
+        {{ subHeadingConfig.text }}
+    </div>
+    <form [formGroup]="consentManageForm" (ngSubmit)="onSubmit()">
+        <div *ngFor="let option of consentData">
+            <label
+                *ngIf="
+                    option.legalCategory !== hide &&
+                    option.rule !== 'ASSENT_IMPLICIT'
+                "
+                [ngClass]="
+                    option.legalCategory === transparent ? 'transparent' : ''
+                "
+                [ngStyle]="configService.getInlineStyles(option)"
+            >
+                <input
+                    class="filled-in"
+                    type="checkbox"
+                    [formControlName]="option.formFieldName"
+                    (click)="change($event, option.formFieldName)"
+                /><span class="input-field">{{ option.text }} </span>
+            </label>
+        </div>
+
+        <button
+            type="submit"
+            class="btn mt-2"
+            [disabled]="btnErrorDisabled || !consentRevokePayload.length"
+        >
+            Submit
+        </button>
+    </form>
+</div>
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>

@@ -1,0 +1,91 @@
+$primaryColor: #004384;
+
+.overlay {
+    position: fixed;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background-color: #ffffff;
+    z-index: 0;
+}
+img {
+    width: 30vh;
+    width: 30vh;
+}
+.nav-partition {
+    margin-top: 10vh;
+    height: 60vh;
+}
+.next {
+    margin-bottom: 5px;
+}
+.number {
+    border-radius: 100%;
+    width: 2.5vw;
+    height: 2.5vw;
+    border: 1px solid $primaryColor;
+    text-align: center;
+    font-size: 1.5vw;
+    font-weight: bold;
+}
+.mr-3 {
+    margin-right: 3rem;
+}
+.btn {
+    width: 6%;
+    float: right;
+    min-height: 2.5vw;
+    border-radius: 0.5vw;
+    background-color: #fff !important;
+    border: 1px solid $primaryColor;
+    color: #000;
+    font-size: 1.2vw;
+}
+.top {
+    position: absolute;
+    top: 11vh;
+    color: #004384;
+}
+.mt {
+    margin-top: 5rem;
+}
+.bottom {
+    position: absolute;
+    bottom: 0;
+    right: 7.5vw;
+    margin-bottom: 4vh;
+}
+.nav-partition-bottom {
+    width: 87%;
+    position: absolute;
+    bottom: 11vh;
+    right: 7.5vw;
+    background-color: #d2d1d1;
+}
+
+.spinner-content {
+    display: flex;
+    margin-top: 10px;
+}
+.preloader-wrapper {
+    width: 23px;
+    height: 23px;
+}
+.loader-text {
+    margin-left: 7px;
+}
+p {
+    font-size: 1vw;
+}
+ol {
+    font-size: 1vw;
+}
+h5 {
+    font-size: 1.65vw;
+}
+h4 {
+    font-size: 2.28vw;
+}
+.firstnumber,
+.secondnumber {
+    font-size: 1.5vw;
+}

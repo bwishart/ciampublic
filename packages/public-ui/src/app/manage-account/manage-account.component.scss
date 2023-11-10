@@ -1,0 +1,40 @@
+$primaryColor: #004384;
+
+.ssn-field {
+    position: relative;
+    .inline-checkbox {
+        position: absolute;
+        left: 7rem;
+        top: 2.25rem;
+    }
+}
+
+.inline-checkbox {
+    input {
+        position: absolute;
+        opacity: 0.1;
+        left: -30rem;
+        pointer-events: none;
+    }
+}
+
+h6 {
+    color: $primaryColor;
+    background-color: #f6f6f6;
+    min-height: 4rem;
+    padding: 1.4rem 0 1rem 1rem;
+    > i {
+        float: right;
+        color: $primaryColor;
+        cursor: pointer;
+        padding-right: 1rem;
+    }
+}
+
+.devices {
+    max-width: 100%;
+}
+
+form {
+    padding-left: 1rem;
+}

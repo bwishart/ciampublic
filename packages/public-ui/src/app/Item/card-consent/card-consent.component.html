@@ -1,0 +1,60 @@
+<div
+    class="form-container"
+    [ngStyle]="configService.getInlineStyles(cardConsentConfig)"
+>
+    <div class="form-heading">
+        <span
+            class="title"
+            [ngStyle]="configService.getInlineStyles(headingConfig)"
+            >{{ headingConfig.text }}</span
+        >
+    </div>
+    <form [formGroup]="consentForm" (ngSubmit)="consentSubmit()">
+        <ng-container *ngFor="let item of content">
+            <div
+                class="input-field"
+                *ngIf="
+                    item.legalCategory !== hide &&
+                    item.rule !== 'ASSENT_IMPLICIT'
+                "
+                [ngClass]="
+                    item.legalCategory === transparent ? 'transparent' : ''
+                "
+            >
+                <p [ngStyle]="configService.getInlineStyles(item)">
+                    {{ item.text }}
+                </p>
+                <div class="radio-field">
+                    <ng-container *ngFor="let radio of radioBtn">
+                        <label>
+                            <input
+                                class="with-gap"
+                                type="radio"
+                                [formControlName]="item.fieldName"
+                                [value]="radio.value"
+                            />
+                            <span>{{ radio.name }}</span>
+                        </label>
+                    </ng-container>
+                </div>
+            </div>
+        </ng-container>
+
+        <div
+            class="mb-2 "
+            [ngStyle]="configService.getInlineStyles(noteConfig)"
+        >
+            {{ noteConfig.text }}
+        </div>
+
+        <button
+            class="btn btn-large"
+            type="submit"
+            [disabled]="consentForm.invalid"
+            [ngStyle]="configService.getInlineStyles(buttonConfig)"
+        >
+            {{ buttonConfig.name }}
+        </button>
+    </form>
+    <app-loading-spinner *ngIf="loading"></app-loading-spinner>
+</div>
